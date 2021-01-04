@@ -1,7 +1,7 @@
 const express = require("express");
 const path = require("path");
 const db = require("./src/databse.json");
-const host="http://localhost:5000";
+const host="https://nft-metadata-api.herokuapp.com";
 
 const app = express();
 

@@ -12,10 +12,12 @@ app.get('/', function(req, res) {
 });
 app.get('/api/token/:token_id', function(req, res) {
   const tokenId = parseInt(req.params.token_id).toString();
-  const person = db[tokenId]
+  const art = db[tokenId]
   const data = {
-    'name': person.name,
-    'image': `${host}/images/${tokenId}.png`
+    'name': art.name,
+    'image': `${host}/images/${tokenId}.png`,
+    'description':art.description,
+    'external_url':art.eternal_url
   };
   res.send(data)
 });

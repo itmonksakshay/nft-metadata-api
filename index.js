@@ -15,7 +15,7 @@ app.get('/api/token/:token_id', function(req, res) {
     'description':art.description,
     'external_url':art.eternal_url
   };
-  res.json(data);
+  res.json(art);
 });
 app.listen(process.env.PORT||3000,function(){
 	console.log("the server is running on port %s" ,this.address().port);

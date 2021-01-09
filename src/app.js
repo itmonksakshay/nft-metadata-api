@@ -7,6 +7,17 @@ import { formatEther } from "@ethersproject/units";
 import {injected} from './connector';
 import ArtMoksha from './contracts/ArtMoksha.json';
 
+const ParentDiv = {
+display: "grid",
+gridTemplateColumns: "repeat(2, 1fr)",
+gridTemplateRows: "1fr",
+griColumnGap: "5px",
+gridRowGap: "5px"
+};
+
+const ChildOne = { gridArea: "1 / 2 / 2 / 3" }
+const ChildTwo   ={ gridArea: "1 / 1 / 2 / 2" }
+
 
 const getLibrary=(provider)=>{
     const library = new Web3Provider(provider);
@@ -24,7 +35,7 @@ async function getTotalSupply(contract){
     for (var i = 1; i <= 2; i++) {
         var owner = await contract.ownerOf(i);
         var metadata = await contract.tokenURI(i);
-        fetch(metadata,{mode: 'no-cors'}).then(response => response.json()).then(data => console.log(data));}
+    }
     console.log(owner);
     return totalSupply;
 }
@@ -44,7 +55,11 @@ const MainPage=({context})=>{
         return(<div><h1>Wallet : </h1>
             <h2>Account :{account}</h2>
             <h2>Network Name: {chainId}</h2>
-            <h2>Total Supply : </h2></div>);
+            <h2>Total Supply : </h2>
+            {(account =="0x64b58066E2cB05D1993E2bFFA7621f6Fcfd3E508")?(
+           <div style={ParentDiv}><div style={ChildOne}><h1>Dave StarBelly</h1><img style={{height:"300px"}} src="https://nft-metadata-api.herokuapp.com/images/1.png"/><p> Friendly OpenSea Creature that enjoys long swims in the </p></div>
+                <div style={ChildTwo}><h1>AK Bhatt</h1><img style={{height:"300px"}} src="https://nft-metadata-api.herokuapp.com/images/2.png"/><p>Akshay Bhatt</p></div></div>):null}
+                </div>);
     }
 
         return(<div><h1>Wallet : </h1>

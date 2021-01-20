@@ -52,7 +52,7 @@ app.get('/api/token/:token_id', function(req, res) {
   res.json(data);
 });
 
-app.get('/api/token/:token_id', function(req, res) {
+app.get('/api/token/', function(req, res) {
     res.json(nft);
 
 });

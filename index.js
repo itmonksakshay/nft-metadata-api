@@ -43,7 +43,6 @@ app.post('/api/token/mint',(req, res) => {
 
 app.get('/api/token/:token_id', function(req, res) {
     const tokenId = parseInt(req.params.token_id).toString();
-    console.log(nft);
     const art = nft[tokenId];
     const data = new Object({
     'name': art.name,
@@ -52,6 +51,13 @@ app.get('/api/token/:token_id', function(req, res) {
   });
   res.json(data);
 });
+
+app.get('/api/token/:token_id', function(req, res) {
+    res.json(nft);
+
+});
+
+
 app.listen(process.env.PORT||5000,function(){
 	console.log("the server is running on port %s" ,this.address().port);
 });

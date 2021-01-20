@@ -1,7 +1,7 @@
 import React,{Component} from 'react'; 
 import {BrowserRouter,Switch,Route,Link} from 'react-router-dom';
 import { connect } from "react-redux";
-import {Web3ReactProvider,getWeb3ReactContext,UnsupportedChainIdError} from "@web3-react/core";
+import {Web3ReactProvider,useWeb3React,UnsupportedChainIdError} from "@web3-react/core";
 import {NoEthereumProviderError,UserRejectedRequestError as UserRejectedRequestErrorInjected} from "@web3-react/injected-connector";
 import { Web3Provider } from "@ethersproject/providers";
 import {Contract} from "@ethersproject/contracts";
@@ -11,8 +11,6 @@ import ArtMoksha from './contracts/ArtMoksha.json';
 import Index from './components';
 import Main from './components/main';
 import Mint from './components/mint';
-import {mintNft,loadWeb3} from './actions';
-import Wallet from './components/wallet';
 /*
 const ParentDiv = {
 display: "grid",
@@ -32,10 +30,16 @@ const getLibrary=(provider)=>{
     return library;
 }
 
+const Wallet=()=> {
+    const context = useWeb3React();
+    const {connector,library,chainId,account,activate,deactivate,active,error} = context;
 
+    const onClick=()=>(activate(injected));
+    return(<div>{active ?(<MainPage context={context}/>) : 
+            (<button type="button" onClick={onClick}>Connect</button>)
+    }</div>);
 
-/*
-
+}
 /*
 const getContract=(address,abi,signer)=>{
         const contract = new Contract(address,abi,signer);
@@ -100,18 +104,17 @@ class App extends Component {
         super(props);
 
     }
+
     componentDidMount(){
-    const context = getWeb3ReactContext();
-    console.log(context);
+
     }
 
     render(){    
-        console.log(this);
+        console.log(this.props);
         return(<BrowserRouter>
                 <Web3ReactProvider getLibrary={getLibrary}>
                     <Index>
                         <Link to="/mint">Mint</Link>
-                        <Wallet/>
                         <Switch>
                             <Route exact path="/"><Main/></Route>
                             <Route path="/mint"><Mint/></Route>
@@ -121,12 +124,12 @@ class App extends Component {
             </BrowserRouter>);
     }
 }
-const mapDispatchToProps = {mintNft,loadWeb3};
-const mapStateToProps =(state) => {
-        return {web3:state.web3.web3,contract:state.contract.contract};
 
+const mapStateToProps = (state) => {
+  return { articles: state.articles,
+            context: state.context};
 };
 
-export default connect(mapStateToProps,mapDispatchToProps)(App);
 
+export default connect(mapStateToProps)(App);
 

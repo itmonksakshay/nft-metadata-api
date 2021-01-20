@@ -21,11 +21,17 @@
     "@ethersproject/units": "^5.0.8",
     "@web3-react/core": "^6.1.1",
     "@web3-react/injected-connector": "^6.0.7",
+    "axios": "^0.21.1",
     "babel-loader": "^8.2.2",
+    "body-parser": "^1.19.0",
     "express": "^4.17.1",
+    "express-form-data": "^2.0.14",
     "html-webpack-plugin": "^4.5.0",
+    "multer": "^1.4.2",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
+    "react-router-dom": "^5.2.0",
+    "redux-thunk": "^2.3.0",
     "webpack": "^5.11.1",
     "webpack-cli": "^4.3.1",
     "webpack-dev-server": "^3.11.1"
@@ -33,6 +39,9 @@
   "devDependencies": {
     "@babel/plugin-proposal-class-properties": "^7.12.1",
     "@babel/plugin-proposal-export-default-from": "^7.12.1",
-    "@babel/polyfill": "^7.12.1"
+    "@babel/polyfill": "^7.12.1",
+    "copy-webpack-plugin": "^7.0.0",
+    "react-redux": "^7.2.2",
+    "redux": "^4.0.5"
   }
 }

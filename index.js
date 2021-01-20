@@ -19,7 +19,6 @@ var storage = multer.diskStorage({
 
 var upload = multer({ storage: storage }).single('file');
 var nft= JSON.parse(fs.readFileSync('./build/database.json'));
-
 const host="https://nft-metadata-api.herokuapp.com/";
 
 
@@ -53,7 +52,16 @@ app.get('/api/token/:token_id', function(req, res) {
 });
 
 app.get('/api/token/', function(req, res) {
-    res.json(nft);
+
+    var apiJson ={};
+    var objectKeysArray = Object.keys(nft);
+        for(i=0;i<objectKeysArray.length;i++){
+            let key =objectKeysArray[i];
+            let element = nft[key];
+            apiJson[key]= { 'name':element.name,'description':element.description,'image': `${host}images/${element.filename}`};            
+        }
+
+        res.json(apiJson);
 
 });
 

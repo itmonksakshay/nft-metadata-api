@@ -10,7 +10,7 @@ module.exports = {
     new CopyWebpackPlugin({
             patterns:[
             {from:'public/images',to:'images'},
-            {from: "public/database.json", to: "database.json" }
+            {from: "public/database.json"}
     ]
     }),   
   ],

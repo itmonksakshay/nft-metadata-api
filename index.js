@@ -3,6 +3,8 @@ const bodyParser = require("body-parser");
 const path = require("path");
 const multer = require('multer');
 //const formData = require('express-form-data');
+const fs = require('fs');
+const app = express();
 
 var storage = multer.diskStorage({
       destination: function (req, file, cb) {
@@ -16,12 +18,10 @@ var storage = multer.diskStorage({
 
 
 var upload = multer({ storage: storage }).single('file');
-const fs = require('fs');
 var nft= JSON.parse(fs.readFileSync('./build/database.json'));
 
 const host="https://nft-metadata-api.herokuapp.com/";
 
-const app = express();
 
 app.use(express.static(path.join(__dirname, 'build')));
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -46,7 +46,7 @@ app.get('/api/token/:token_id', function(req, res) {
     const art = nft[tokenId];
     const data = new Object({
     'name': art.name,
-    'image': `${host}/images/${art.filename}`,
+    'image': `${host}images/${art.filename}`,
     'description':art.description
   });
   res.json(data);
